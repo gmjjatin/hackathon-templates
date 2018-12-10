@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 17px;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.content {
+    position: fixed;
+    width: 100%;
+    padding: 20px;
+}
+
+#myBtn {
+    width: 70px;
+    font-size: 15px;
+    padding: 2px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+#myBtn:hover {
+    background: #ddd;
+    color: white;
+}
+
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* Global */
+
+.line-1{
+
+    width: 24em;
+    border-right: 2px solid white;
+    font-size: 120%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 100%;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: white;}
+  to{border-right-color: transparent;}
+}
+
+
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url("{% static 'school/assets/images/loading.gif' %}") no-repeat center center white
+}
+
+</style>
+
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+
+
+
+
+</script>
+
+
+</head>
+<body>
+ <div id="load"></div>
+    <div id="contents">
+<video autoplay muted loop id="myVideo" poster="{% static 'school/assets/images/mobileback.jpg' %}">
+  <source src="{% static 'school/assets/video/backreg.mp4'  %}" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="content">
+  <p class="line-1 anim-typewriter" style="font-size:110%;color:white">Enter into the portal ---> <br>{{content}}</p>
+  <center><form method='post'>
+    {% csrf_token %}
+    <legend style="font-size:150%; color:white">
+      Email:
+    </legend><br>
+    <input type='email' name="email" placeholder="abc@example.com" style="color:#990000;font-size:140%;opacity:0.9;min-width:250px ;min-height:30px"required />
+    <br>
+    <br>
+    <legend style="font-size:150%;color:white">
+      Password:
+    </legend ><br>
+    <input type="password" name="password" style="color:#990000;font-size:140%;opacity:0.9;min-width:250px ;min-height:30px" required />
+<br>
+<br>
+  <input type="submit" style="background-color:violet;color:white;min-height:30px;min-width: 100px" value="Login" >
+</form></center>
+<br><br><br><br><br>
+<a href="{% url 'register' %}"><p class="line-1 anim-typewriter" style="color:white;font-size:80%">Click here to register</p></a>
+<a href="{% url 'team_register' %}"><p class="line-1 anim-typewriter" style="color:white;font-size:80%">Click here to register a team</p></a>
+
+
+</div>
+</div>
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+</body>
+</html>

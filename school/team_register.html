@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static "school/assets/css/loader.css" %}">
+<script src="{% static "school/assets/js/vendor/jquery-1.11.2.min.js" %}"></script>
+<script src="{% static "school/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
+<link rel="stylesheet" href="{% static "school/assets/css/swiper.min.css" %}">
+<link rel="stylesheet" href="{% static "school/assets/css/animate.css" %}">
+<link rel="stylesheet" href="{% static "school/assets/css/iconfont.css" %}">
+<link rel="stylesheet" href="{% static "school/assets/css/font-awesome.min.css" %}">
+
+<link rel="stylesheet" href="{% static "school/assets/css/bootstrap.min.css" %}">
+<link rel="stylesheet" href="{% static "school/assets/css/magnific-popup.css" %}">
+<link rel="stylesheet" href="{% static "school/assets/css/bootsnav.css" %}">
+<!--Theme custom css -->
+<link rel="stylesheet" href="{% static "school/assets/css/style.css" %}">
+<link rel="stylesheet" href="{% static "school/assets/css/index.css" %}">
+<link rel="icon" href="{% static "school/assets/images/favicon.png" %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
+
+
+<!--Theme Responsive css-->
+<link rel="stylesheet" href="{% static "school/assets/css/responsive.css" %}">
+
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 17px;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.content {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+}
+
+#myBtn {
+    width: 70px;
+    font-size: 15px;
+    padding: 2px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+#myBtn:hover {
+    background: #ddd;
+    color: white;
+}
+
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* Global */
+
+.line-1{
+
+    width: 24em;
+    border-right: 2px solid white;
+    font-size: 120%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 100%;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: white;}
+  to{border-right-color: transparent;}
+}
+
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url("{% static 'school/assets/images/loading.gif' %}") no-repeat center center white
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+
+</head>
+<body>
+<div id="load"></div>
+    <div id="contents">
+<video autoplay muted loop id="myVideo"  poster="{% static 'school/assets/images/mobileback.jpg' %}" >
+  <source src="{% static 'school/assets/video/backreg.mp4'  %}" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="content">
+  <br>
+  <b><h5 class="line-1 anim-typewriter" style="color:brown;font-size:180%;color:white">Get your seat for the hackthon <br><br> {{content}} --></h5></b>
+  <div class="container"><form method='post'>
+  {% csrf_token %}
+  <!--- row 1 -->
+  <div class='row'>
+    <div class='col-sm-1'>
+      </div>
+    <div class='col-sm-4' style="color:brown;text-align:left">
+
+  <label style="color:brown;font-size:150%; color:white">
+    Team Name:
+  </label><br>
+  <input  name="name" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px"required />
+  </div>
+  <div class='col-sm-2'>
+  </div>
+  <div class='col-sm-4' style="color:brown;text-align:right">
+  <label style="color:brown;font-size:150%;color:white">
+    School Code given by IRSC:
+  </label ><br>
+  <input name="code" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px" required />
+  </div>
+  <div class='col-sm-1'>
+  </div>
+  </div>
+    <!--- row 1 -->
+    <div class='row'>
+      <div class='col-sm-1'>
+        </div>
+      <div class='col-sm-4' style="color:brown;text-align:left">
+
+    <label style="color:brown;font-size:150%; color:white">
+      Member1:
+    </label><br>
+    <input  name="member1" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px"required />
+  </div>
+<div class='col-sm-2'>
+  </div>
+    <div class='col-sm-4' style="color:brown;text-align:right">
+    <label style="color:brown;font-size:150%;color:white">
+      Member2:
+    </label ><br>
+    <input name="member2" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px" required />
+  </div>
+  <div class='col-sm-1'>
+    </div>
+  </div>
+
+<!--- row 2 -->
+
+
+<!--- row 3 -->
+<div class='row'>
+  <div class='col-sm-1'>
+    </div>
+  <div class='col-sm-4' style="color:brown;text-align:left">
+
+<label style="color:brown;font-size:150%; color:white">
+  Member1 Contact No.:
+</label><br>
+<input  name="contact1" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px"required />
+</div>
+<div class='col-sm-2'>
+</div>
+<div class='col-sm-4' style="color:brown;text-align:right">
+<label style="color:brown;font-size:150%;color:white">
+  Member2 Contact No.:
+</label ><br>
+<input name="contact2" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px" required />
+</div>
+<div class='col-sm-1'>
+</div>
+</div>
+
+<!--- row 4 -->
+<div class='row'>
+  <div class='col-sm-1'>
+    </div>
+  <div class='col-sm-4' style="color:brown;text-align:left">
+
+<label style="color:brown;font-size:150%; color:white">
+  Member1 Email.:
+</label><br>
+<input type="email" name="email1" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px"required />
+</div>
+<div class='col-sm-2'>
+</div>
+<div class='col-sm-4' style="color:brown;text-align:right">
+<label style="color:brown;font-size:150%;color:white">
+  Member2 Email.:
+</label ><br>
+<input type="email" name="email2" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px" required />
+</div>
+<div class='col-sm-1'>
+</div>
+</div>
+
+<!--- row 5 -->
+<div class='row'>
+  <div class='col-sm-1'>
+    </div>
+  <div class='col-sm-4' style="color:brown;text-align:left">
+
+<label style="color:brown;font-size:150%; color:white">
+  Standard of Class of Member1:
+</label><br>
+<input name="stdofclass1" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px"required />
+</div>
+<div class='col-sm-2'>
+</div>
+<div class='col-sm-4' style="color:brown;text-align:right">
+<label style="color:brown;font-size:150%;color:white">
+  Standard of Class of Member2:
+</label ><br>
+<input name="stdofclass2" style="color:brown;opacity:0.9;font-size:140%;min-width:250px ;min-height:30px" required />
+</div>
+<div class='col-sm-1'>
+</div>
+</div>
+
+<br>
+<br>
+
+<div class='row'>
+<div class='col-sm-1'>
+</div>
+
+<div class='col-sm-9' style="color:brown;text-align:left">
+<input onclick="myFunction()" type="checkbox" name="computerscience" style="color:brown;opacity:0.9;font-size:140%;min-width:30px ;min-height:30px" required />
+<label style="color:brown;font-size:150%;color:white">
+I agree to the <a href="{% static 'school/assets/docs/terms.pdf' %}" >terms and conditions</a>
+</label >
+
+</div>
+<div class='col-sm-2' style="color:brown;text-align:left">
+  <input id="button" type="submit" style="color:brown;background-color:violet;color:white;min-height:30px" value="Register" >
+</div>
+<div class='col-sm-1'>
+</div>
+</div>
+
+<br>
+<br>
+
+</form></center>
+</div>
+
+<br>
+<a href="{% url 'login' %}"><p class="line-1 anim-typewriter" style="color:white;font-size:140%">Click here to login</p></a>
+<a href="{% url 'home' %}"><p class="line-1 anim-typewriter" style="color:white;font-size:140%">Home</p></a>
+
+</div>
+</div>
+<script>
+$(window).load(function() {
+	// Animate loader off screen
+	var x = document.getElementById("button");
+  x.style.display = "none";
+});
+
+function myFunction() {
+    var x = document.getElementById("button");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+
+</head>
+<body>
+  <h1>Practice Test Question Submission</h1>
+  <h1>{{content}}</h1>
+<form method='post' enctype="multipart/form-data">
+  {% csrf_token %}
+<label>Ques</label>
+  <input name = 'ques' type='file' accept="image/*" required></input>
+<label>Type</label>
+  <select name = "type" required>
+    <option value='Aptitude'>Aptitude</option>
+    <option value='Programming'>Programming</option>
+    <option value="Science">Science</option>
+
+  </select>
+<label>number of option</label>
+  <input name = 'numofopt' type='number' min = '2' onchange='myfunc(this.value)'  ></input>
+  <div id='opt'></div>
+<input type='checkbox' required/><label> Sure to save question </label>
+<button type=submit>save</button>
+</form>
+
+<script>
+function myfunc(e){
+
+  var div = document.getElementById('opt');
+  div.innerHTML = "";
+  for(i=0;i<e;i++){
+    div.innerHTML = div.innerHTML + "<label>option "+ i +"</label><br><input name ='op"+ i +"' type='file'><br><input name ='answer"+ i +"' type='radio'><br>";
+  }
+
+}
+
+
+
+</script>
+</body>
+
+
+</html>

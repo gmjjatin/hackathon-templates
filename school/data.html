@@ -1,0 +1,68 @@
+{% load static %}
+<html>
+
+  <head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+
+
+</style>
+  </head>
+
+  <body>
+
+<form method='post'>
+{% csrf_token %}
+
+
+<legend>Username</legend>
+	<input type='text' name='username'  />
+
+<legend>Password</legend>
+	<input type='password' name='password'>
+
+<input type='submit' value='submit'>
+</form>
+<br>
+<br>
+{% if lg is True %}
+<table >
+{% for s in school %}
+
+
+<tr>
+<td>{{ forloop.counter }}</td>
+<td>{{ s.name }}</td>
+<td>{{ s.address }}</td>
+<td>{{ s.representator }}</td>
+<td>{{ s.representator_contact }}</td>
+<td>{{ s.school_contact }}</td>
+<td>{{ s.code }}</td>
+<td>
+{% for t in s.team_set.all %}
+<h5>{{t.name}}</h5>
+<ol>
+  {% for m in t.member_set.all %}
+<li>{{m.name}}</li>
+
+{% endfor %}
+</ol>
+{% endfor %}
+</td>
+
+</tr>
+
+{% endfor %}
+</table>
+
+<br><br>
+<p>Number of Teams: {{ teamcount }}</p>
+{% endif %}
+
+    </body>
+
+
+
+  </html>
