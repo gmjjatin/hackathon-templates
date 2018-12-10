@@ -81,7 +81,10 @@
                             <a href="#guide" onclick="">GUIDELINES</a>
                         </li>
                         <li>
-                            <a href="practice" onclick="">Practice Test</a>
+                            <a href="practice" onclick="">PRACTICE TEST</a>
+                        </li>
+                        <li>
+                            <a data-toggle="modal" data-target="#myModal">NOTIFICATIONS</a>
                         </li>
                     </ul>
                 </div>
@@ -155,6 +158,35 @@
                      </div>
                      </div>
              </footer>
+             <!-- The Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header alert alert-primary">
+          <h4 class="modal-title ">Notifications</h4>
+          <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <ul class="list-group">
+          <!-- u can change color of notification by add: bg-light/info/primary -->
+           <a type="button" class="list-group-item bg-light">Noti 1</a>
+           <a type="button" class="list-group-item bg-primary text-white">Noti 2</a>
+           <a type="button" class="list-group-item bg-info text-white">Noti 3</a>
+          </ul>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
     </div>
 </div>
@@ -169,6 +201,17 @@
     <script src="{% static "school/assets/js/main.js" %}"></script>
     <script type="text/javascript" src="{% static "school/assets/js/index.js" %}"></script>
     <script src="{% static "school/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+    <script>
+  $(window).on('load',function(){
+        $('#myModal').modal('show');
+        
+    });
+  $('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus');
+  
+})
+</script>
+
 
 
 

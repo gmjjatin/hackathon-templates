@@ -75,8 +75,9 @@
                         <li>
                             <a href="#details" onclick="">School Details</a>
                         </li>
-
-
+                        <li>
+                            <a data-toggle="modal" data-target="#myModal">Notifications</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -156,6 +157,37 @@
                      </div>
                      </div>
              </footer>
+             <!-- The Modal -->
+  
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header alert alert-primary">
+          <h4 class="modal-title ">Notifications</h4>
+   <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <ul class="list-group">
+          <!-- u can change color of notification by add: bg-light/info/primary -->
+           <a type="button" class="list-group-item bg-light">Noti 1</a>
+           <a type="button" class="list-group-item bg-primary text-white">Noti 2</a>
+           <a type="button" class="list-group-item bg-info text-white">Noti 3</a>
+          </ul>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
 
     </div>
 </div>
@@ -193,6 +225,17 @@ function func(id){
 
 
 </script>
+<script>
+  $(window).on('load',function(){
+        $('#myModal').modal('show');
+        
+    });
+  $('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus');
+  
+})
+</script>
+
 
 </body></html>
 
