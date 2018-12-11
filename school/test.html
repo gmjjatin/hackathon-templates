@@ -89,31 +89,31 @@
         </div>
 
         <div class="row">
-        <div class="col-xs-12 alert alert-success" id="typeOfQuestion">General</div>
+        <div class="col-xs-12 alert alert-success" id="typeOfQuestion">Aptitude</div>
         <p>Choose a question:</p>
         </div>
         <!-- for general section :question btn -->
-        <div class="col-xs-12 qpBtn" id="GeneralBtn">
+        <div class="col-xs-12 qpBtn" id="AptitudeBtn">
           {% for q in general_ques %}
 
               {% if forloop.counter == 1 %}
-                <button class="btn btn-light GeneralBtn  alert alert-info" id="Generalqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q1</button>
+                <button class="btn btn-light AptitudeBtn  alert alert-info" id="Aptitudeqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q1</button>
               {% else %}
-                <button class="btn btn-light GeneralBtn" id="Generalqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q2</button>
+                <button class="btn btn-light AptitudeBtn" id="Aptitudeqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q2</button>
               {% endif %}
 
           {% endfor %}
 
 		</div>
-		<!-- for Maths section :question btn -->
-		<div class="col-xs-12 qpBtn hide" id="MathsBtn">
+		<!-- for Programming section :question btn -->
+		<div class="col-xs-12 qpBtn hide" id="ProgrammingBtn">
 
       {% for q in math_ques %}
 
           {% if forloop.counter == 1 %}
-            <button class="btn btn-light MathsBtn alert alert-info" id="Mathsqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q{{ forloop.counter }}</button>
+            <button class="btn btn-light ProgrammingBtn alert alert-info" id="Programmingqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q{{ forloop.counter }}</button>
           {% else %}
-            <button class="btn btn-light MathsBtn" id="Mathsqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q{{ forloop.counter }}</button>
+            <button class="btn btn-light ProgrammingBtn" id="Programmingqp{{ forloop.counter }}" onclick="changeQuestion(event)">Q{{ forloop.counter }}</button>
           {% endif %}
 
       {% endfor %}
@@ -150,8 +150,8 @@
         <div class="col-lg-8 col-xs-10 questionContent">
         <div class="row alert alert-lightblue" >
         <div class="col-12" >
-        	<button class="btn btn-primary" type="button" onClick="changeSection(event)">General</button>
-        	<button class="btn btn-primary" type="button" onClick="changeSection(event)">Maths</button>
+        	<button class="btn btn-primary" type="button" onClick="changeSection(event)">Aptitude</button>
+        	<button class="btn btn-primary" type="button" onClick="changeSection(event)">Programming</button>
         	<button class="btn btn-primary" type="button" onClick="changeSection(event)">Science</button>
 			<br>
         </div>
@@ -159,14 +159,14 @@
 
         <form>
 
-        <div class="row white section" id="General" style="overflow:auto; height:380px;">
+        <div class="row white section" id="Aptitude" style="overflow:auto; height:380px;">
 
           {% for q in general_ques %}
 
           {% if forloop.counter == 1 %}
-            <div class="col-lg-12 General" id="Generalq{{ forloop.counter }}">
+            <div class="col-lg-12 Aptitude" id="Aptitudeq{{ forloop.counter }}">
           {% else %}
-            <div class="col-lg-12 General hide" id="Generalq{{ forloop.counter }}" >
+            <div class="col-lg-12 Aptitude hide" id="Aptitudeq{{ forloop.counter }}" >
           {% endif %}
             <div class="row">
             <br>
@@ -177,6 +177,10 @@
               {% for op in q.pracop_set.all %}
 
           	<label><input type="radio" name="{{q.uid}}" value="{{op.uid}}">  <img src="{{ op.option.url }}"></label><br>
+            <!-- ###########Timer for each question of general################ -->
+            <input type="number" name="{{q.uid+'timer'}}" class="questionTimer" value="0">  
+            <!-- ###########Timer for each question ENDS ################ -->
+
 
               {% endfor %}
           	</div>
@@ -187,14 +191,14 @@
       </div>
 
         <!-- for maths section -->
-        <div class="row white section hide" id="Maths" style="overflow:auto; height:380px;">
+        <div class="row white section hide" id="Programming" style="overflow:auto; height:380px;">
 
           {% for q in math_ques %}
 
           {% if forloop.counter == 1 %}
-             <div class="col-lg-12 Maths" id="Mathsq{{ forloop.counter }}">
+             <div class="col-lg-12 Programming" id="Programmingq{{ forloop.counter }}">
           {% else %}
-            <div class="col-lg-12 Maths hide" id="Mathsq{{ forloop.counter }}" >
+            <div class="col-lg-12 Programming hide" id="Programmingq{{ forloop.counter }}" >
           {% endif %}
             <div class="row">
             <br>
@@ -205,7 +209,9 @@
               {% for op in q.pracop_set.all %}
 
           	<label><input type="radio" name="{{q.uid}}" value="{{op.uid}}">  <img src="{{ op.option.url }}"></label><br>
-
+              <!-- ###########Timer for each question of general################ -->
+            <input type="number" name="{{q.uid+'timer'}}" class="questionTimer" value="0">  
+            <!-- ###########Timer for each question ENDS ################ -->
               {% endfor %}
           	</div>
           </div>
@@ -233,7 +239,9 @@
               {% for op in q.pracop_set.all %}
 
           	<label><input type="radio" name="{{q.uid}}" value="{{op.uid}}">  <img src="{{ op.option.url }}"></label><br>
-
+            <!-- ###########Timer for each question of general################ -->
+            <input type="number" name="{{q.uid+'timer'}}" class="questionTimer" value="0">  
+            <!-- ###########Timer for each question ENDS ################ -->
               {% endfor %}
           	</div>
           </div>
@@ -246,10 +254,16 @@
 		<div class="row alert alert-lightblue">
 
 			<div class="col-lg-6">
-			<button type="button" class="btn btn-warning Generalq1" id="markBtn" onclick="markForReview()" >MARK FOR REVIEW</button>
-        	<button type="button" class="btn btn-info Generalq1" id="previousBtn" onclick="changeToPreviousQuestion(event)" >PREVIOUS</button>
-        	<button type="button" class="btn btn-info Generalq1" id="nextBtn" onclick="changeToNextQuestion(event)" >NEXT</button>
+			<button type="button" class="btn btn-warning Aptitudeq1" id="markBtn" onclick="markForReview()" >MARK FOR REVIEW</button>
+        	<button type="button" class="btn btn-info Aptitudeq1" id="previousBtn" onclick="changeToPreviousQuestion(event)" >PREVIOUS</button>
+        	<button type="button" class="btn btn-info Aptitudeq1" id="nextBtn" onclick="changeToNextQuestion(event)" >NEXT</button>
         	</div>
+
+
+          <!-- hidden input fields to be sent along with others -->
+          <input type="text" id="school" name="school">
+          <input type="text" id="team" name="team">
+          <!-- hidden input fields to be sent along with others ENDS-->
 
         	<div class="col-lg-3" style="float:right;">
         	<button type="submit" onclick="" class="btn btn-danger">SUBMIT</button>
@@ -314,7 +328,18 @@
 
 
 
+    <!-- ##### each question timer function script ##### -->
+      <script>
+        var timerVar=setInterval(getTimerValue,1000);
+        getTimerValue(){
+          clearInterval(timerVar);
+          var target=document.querySelectorAll(".section:not(.hide) .col-lg-12:not(.hide) .questionTimer");
+          var target.value=target.valueAsNumber+1;
+          timerVar=setInterval(getTimerValue,1000);
+        }
+      </script>
 
+    <!-- ##### each question timer function script Ends##### -->
 
 
 
